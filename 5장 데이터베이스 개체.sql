@@ -126,3 +126,71 @@ END $$
 DELIMITER ;
 
 CALL proc_test7();
+
+
+#실습 5-10
+DELIMITER $$
+CREATE PROCEDURE proc_test8()
+BEGIN
+# 변수 선언
+DECLARE total INT DEFAULT 0;
+DECLARE price INT;
+DECLARE endOfRow BOOLEAN DEFAULT false;
+# 커서 선언
+DECLARE salesCursor CURSOR FOR
+SELECT `sale` FROM `Sales`;
+# 반복 조건
+DECLARE CONTINUE HANDLER
+FOR NOT FOUND SET endOfRow = TRUE;
+# 커서 열기
+OPEN salesCursor;
+cursor_loop: LOOP
+FETCH salesCursor INTO price;
+IF endOfRow THEN
+LEAVE cursor_loop;
+END IF;
+SET total = total + price;
+END LOOP;
+SELECT total AS '전체 합계';
+CLOSE salesCursor;
+END $$
+DELIMITER ;
+
+CALL proc_test8();
+
+
+#실습 5-11
+DELIMITER $$
+CREATE FUNCTION func_test1(_userid VARCHAR(10)) RETURNS INT
+deterministic
+BEGIN
+DECLARE total INT;
+SELECT SUM(`sale`) INTO total FROM `Sales` WHERE `uid`=_userid;
+RETURN total;
+END $$
+DELIMITER ;
+
+select func_test1('a101');
+
+DELIMITER $$
+CREATE FUNCTION func_test2(_sale INT) RETURNS DOUBLE
+deterministic
+BEGIN
+DECLARE bonus DOUBLE;
+IF (_sale >= 100000) THEN
+SET bonus = _sale * 0.1;
+ELSE
+SET bonus = _sale * 0.05;
+END IF;
+
+RETURN bonus;
+END $$
+DELIMITER ;
+
+select
+`uid`,
+`year`,
+`month`,
+`sale`,
+func_test2(`sale`) as `bonus`
+FROM `Sale`;
