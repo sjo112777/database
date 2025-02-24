@@ -2,8 +2,8 @@
 #이름 : 손준오
 #내용 : 6장 데이터모델링
 
---실습 6-1. 아래 테이블 명세서를 참고해서 ERD작성
---실습 6-2. 아래와 같이 데이터를 입력하시오.
+#실습6-1.아래테이블명세서를참고해서ERD작성하시오.
+#실습6-2.아래와같이데이터를입력하시오.
 insert into `Customer` values ('c101', '김유신', '010-1234-1001', '경남 김해시', '2023-01-01');
 insert into `Customer` values ('c102', '김춘추', '010-1234-1002', '경남 경주시', '2023-01-02');
 insert into `Customer` values ('c103', '장보고', '010-1234-1003', '전남 완도군', '2023-01-03');
@@ -46,7 +46,7 @@ join `Product` as c on a.orderProduct = c.prodNo
 where `name`='김유신';
 
 
-selecollegeerdregistercollegeerdct 
+select 
 	SUM(`price` * `orderCount`)
 from `Order` as a
 join `Product` as b on a.orderProduct = b.prodNo;
@@ -67,7 +67,7 @@ insert into `bank_account` values ('101-12-1001', 'S2', '기업저축예금', '1
 insert into `bank_account` values ('101-13-1001', 'S3', '정기저축예금', '730423-1000002', 1200000, '2011-08-15');
 
 insert into `bank_transaction` set `t_a_no`='101-11-1001', `t_dist`=1, `t_amount`=50000, `t_datetime`=NOW();
-insert INTO `bank_transaction` set `t_a_no`='101-12-1001', `t_dist`=2, `t_amount`=1000000, `t_datetime`=NOW();
+insert into `bank_transaction` set `t_a_no`='101-12-1001', `t_dist`=2, `t_amount`=1000000, `t_datetime`=NOW();
 insert into `bank_transaction` set `t_a_no`='101-11-1002', `t_dist`=3, `t_amount`=260000, `t_datetime`=NOW();
 insert into `bank_transaction` set `t_a_no`='101-11-1002', `t_dist`=2, `t_amount`=100000, `t_datetime`=NOW();
 insert into `bank_transaction` set `t_a_no`='101-11-1003', `t_dist`=3, `t_amount`=750000, `t_datetime`=NOW();
@@ -85,7 +85,7 @@ select
 from `bank_customer` as a 
 join `bank_account` as b on a.c_no = b.a_c_no;
 
-select 
+SELECT 
 	`t_dist`,
     `t_amount`,
     `t_datetime`
@@ -108,7 +108,25 @@ limit 1;
 
 #실습6-7.CollegeERD 작성
 #실습6-8.CollegeERD 데이터 입력
-lecture
+insert into `Student` values ('20201011', '김유신', '010-1234-1001', 3, '경남 김해시');
+insert into `Student` values ('20201122', '김춘추', '010-1234-1002', 3, '경남 경주시');
+insert into `Student` values ('20210213', '장보고', '010-1234-1003', 2, '전남 완도군');
+insert into `Student` values ('20210324', '강감찬', '010-1234-1004', 2, '서울 관악구');
+insert into `Student` values ('20220415', '이순신', '010-1234-1005', 1, '서울 종로구');
+
+insert into `Lecture` values (101, '컴퓨터과학 개론', 2, 40, '본301');
+insert into `Lecture` values (102, '프로그래밍 언어', 3, 52, '본302');
+insert into `Lecture` values (103, '데이터베이스', 3, 56, '본303');
+insert into `Lecture` values (104, '자료구조', 3, 60, '본304');
+insert into `Lecture` values (105, '운영체제', 3, 52, '본305');
+
+insert into `Register` values ('20220415', 101, 60, 30, null, null);
+insert into `Register` values ('20210324', 103, 54, 36, null, null);
+insert into `Register` values ('20201011', 105, 52, 28, null, null);
+insert into `Register` values ('20220415', 102, 38, 40, null, null);
+insert into `Register` values ('20210324', 104, 56, 32, null, null);
+insert into `Register` values ('20210213', 103, 48, 40, null, null);
+
 #실습6-9.CollegeERD 데이터 조회
 select 
 	`stdNo`,
