@@ -3,7 +3,7 @@
 # 내용: 1장 데이터베이스 설치와 생성
 
 # 실습 1-1
-CREATE DATABASE `StudyDB1`;
+CREATE DATABASE `StudyDB`;
 DROP DATABASE `StudyDB`;
 
 # 실습 1-2
